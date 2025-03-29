@@ -1,12 +1,16 @@
-from flask import Flask
+from flask import Flask, jsonify
+from cricket_scraper import scrape_cricket_data
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def cricgfg():
+    url = 'https://sports.ndtv.com/cricket/live-scores'
+    result = scrape_cricket_data(url)
+    return jsonify(result)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
